@@ -41,6 +41,26 @@ class MeetupController {
     return res.json(meetups);
   }
 
+  async show(req, res) {
+    const meetup = await Meetup.findByPk(req.params.id, {
+      include: [
+        {
+          model: File,
+          as: 'banner',
+          attributes: ['id', 'path', 'url'],
+        },
+      ],
+      attributes: ['id', 'title', 'description', 'location', 'date', 'user_id'],
+    });
+
+    if (meetup.user_id !== req.userId) {
+      return res
+        .status(401)
+        .json({ error: 'Only the organizer can View this Meetup.' });
+    }
+    return res.json(meetup);
+  }
+
   async store(req, res) {
     const schema = Yup.object().shape({
       title: Yup.string().required(),
@@ -55,7 +75,7 @@ class MeetupController {
     }
 
     if (isBefore(parseISO(req.body.date), new Date())) {
-      return res.status(400).json({ error: 'Meetup date is invalid!' });
+      return res.status(400).json({ error: 'Meetup date is past!' });
     }
 
     const meetup = await Meetup.create({
