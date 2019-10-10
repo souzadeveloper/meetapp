@@ -34,8 +34,12 @@ export default function Profile() {
   const dispatch = useDispatch();
   const profile = useSelector(state => state.user.profile);
 
-  function handleSubmit(data) {
+  function handleSubmit(data, { resetForm }) {
     dispatch(updateProfileRequest(data));
+
+    resetForm({ oldPassword: '' });
+    resetForm({ password: '' });
+    resetForm({ confirmPassword: '' });
   }
 
   return (
