@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import ReactDatePicker, { registerLocale } from 'react-datepicker';
 import PropTypes from 'prop-types';
+import { parseISO } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 
 import { useField } from '@rocketseat/unform';
@@ -11,10 +12,16 @@ import { Container } from './styles';
 
 registerLocale('pt', pt);
 
-export default function DateTimePicker({ name, placeholder }) {
+export default function DateTimePicker({ name, placeholder, value }) {
   const ref = useRef(null);
   const { fieldName, registerField, defaultValue, error } = useField(name);
   const [selected, setSelected] = useState(defaultValue);
+
+  useEffect(() => {
+    if (value) {
+      setSelected(parseISO(value));
+    }
+  }, [value]);
 
   useEffect(() => {
     registerField({
@@ -50,8 +57,10 @@ export default function DateTimePicker({ name, placeholder }) {
 DateTimePicker.propTypes = {
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
+  value: PropTypes.string,
 };
 
 DateTimePicker.defaultProps = {
   placeholder: '',
+  value: null,
 };

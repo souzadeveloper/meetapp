@@ -38,7 +38,7 @@ export default function Edit({ match }) {
   }, [id]);
 
   async function handleSubmit(data) {
-    await api.post('meetups', data);
+    await api.put(`meetups/${id}`, data);
 
     history.push('/dashboard');
   }
@@ -46,7 +46,7 @@ export default function Edit({ match }) {
   return (
     <Container>
       <Form initialData={meetup} onSubmit={handleSubmit} schema={schema}>
-        <BannerInput name="file_id" />
+        <BannerInput name="file_id" banner={meetup.banner} />
         <Input name="title" type="text" placeholder="Título do Meetup" />
         <Input
           multiline
@@ -54,7 +54,11 @@ export default function Edit({ match }) {
           rows="10"
           placeholder="Descrição Completa"
         />
-        <DateTimePicker name="date" placeholder="Data do Meetup" />
+        <DateTimePicker
+          name="date"
+          placeholder="Data do Meetup"
+          value={meetup.date}
+        />
         <Input name="location" type="text" placeholder="Localização" />
         <button type="submit">
           <MdAddCircleOutline size={20} color="#fff" />

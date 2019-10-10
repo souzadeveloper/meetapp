@@ -12,6 +12,7 @@ import BannerInput from '../BannerInput';
 import { Container } from './styles';
 
 const schema = Yup.object().shape({
+  banner: Yup.number().required('A Imagem do Banner é obrigatória'),
   title: Yup.string().required('O Título do Meetup é obrigatório'),
   description: Yup.string().required('A Descrição Completa é obrigatória'),
   date: Yup.date()

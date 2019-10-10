@@ -37,9 +37,9 @@ export default function Profile() {
   function handleSubmit(data, { resetForm }) {
     dispatch(updateProfileRequest(data));
 
-    resetForm({ oldPassword: '' });
-    resetForm({ password: '' });
-    resetForm({ confirmPassword: '' });
+    // resetForm({ oldPassword: '' });
+    // resetForm({ password: '' });
+    // resetForm({ confirmPassword: '' });
   }
 
   return (
