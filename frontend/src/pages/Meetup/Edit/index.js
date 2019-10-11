@@ -13,6 +13,7 @@ import BannerInput from '../BannerInput';
 import { Container } from './styles';
 
 const schema = Yup.object().shape({
+  file_id: Yup.number().required('A Imagem do Banner é obrigatória'),
   title: Yup.string().required('O Título do Meetup é obrigatório'),
   description: Yup.string().required('A Descrição Completa é obrigatória'),
   date: Yup.date()
@@ -45,7 +46,12 @@ export default function Edit({ match }) {
 
   return (
     <Container>
-      <Form initialData={meetup} onSubmit={handleSubmit} schema={schema}>
+      <Form
+        initialData={meetup}
+        onSubmit={handleSubmit}
+        schema={schema}
+        autoComplete="off"
+      >
         <BannerInput name="file_id" banner={meetup.banner} />
         <Input name="title" type="text" placeholder="Título do Meetup" />
         <Input

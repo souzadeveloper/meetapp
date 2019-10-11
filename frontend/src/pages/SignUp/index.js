@@ -28,7 +28,7 @@ export default function SignUp() {
   return (
     <>
       <img src={logo} alt="Meetapp" />
-      <Form onSubmit={handleSubmit} schema={schema}>
+      <Form onSubmit={handleSubmit} schema={schema} autoComplete="off">
         <Input name="name" type="text" placeholder="Nome Completo" />
         <Input name="email" type="email" placeholder="Seu E-mail" />
         <Input name="password" type="password" placeholder="Sua Senha" />

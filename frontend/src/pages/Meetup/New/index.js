@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, Input } from '@rocketseat/unform';
 import * as Yup from 'yup';
 import { MdAddCircleOutline } from 'react-icons/md';
+import { toast } from 'react-toastify';
 
 import api from '~/services/api';
 import history from '~/services/history';
@@ -12,7 +13,7 @@ import BannerInput from '../BannerInput';
 import { Container } from './styles';
 
 const schema = Yup.object().shape({
-  banner: Yup.number().required('A Imagem do Banner é obrigatória'),
+  file_id: Yup.number().required('A Imagem do Banner é obrigatória'),
   title: Yup.string().required('O Título do Meetup é obrigatório'),
   description: Yup.string().required('A Descrição Completa é obrigatória'),
   date: Yup.date()
@@ -24,14 +25,18 @@ const schema = Yup.object().shape({
 
 export default function New() {
   async function handleSubmit(data) {
-    await api.post('meetups', data);
+    try {
+      await api.post('meetups', data);
 
-    history.push('/dashboard');
+      history.push('/dashboard');
+    } catch (err) {
+      toast.error('Erro ao Cadastrar o Meetup. Verifique os Dados!');
+    }
   }
 
   return (
     <Container>
-      <Form onSubmit={handleSubmit} schema={schema}>
+      <Form onSubmit={handleSubmit} schema={schema} autoComplete="off">
         <BannerInput name="file_id" />
         <Input name="title" type="text" placeholder="Título do Meetup" />
         <Input

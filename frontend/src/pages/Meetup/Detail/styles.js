@@ -83,12 +83,15 @@ export const Container = styled.div`
 export const Description = styled.strong`
   color: #fff;
   font-size: 18px;
+  display: flex;
+  text-align: justify;
 `;
 
 export const Time = styled.strong`
   display: flex;
   align-items: center;
   margin-right: 30px;
+  margin-bottom: 20px;
 
   strong {
     color: #999;
@@ -100,6 +103,7 @@ export const Time = styled.strong`
 export const Location = styled.strong`
   display: flex;
   align-items: center;
+  margin-bottom: 20px;
 
   strong {
     color: #999;

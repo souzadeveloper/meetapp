@@ -26,13 +26,8 @@ export default function SignIn() {
   return (
     <>
       <img src={logo} alt="Meetapp" />
-      <Form onSubmit={handleSubmit} schema={schema}>
-        <Input
-          name="email"
-          type="email"
-          placeholder="Seu e-mail"
-          autoComplete="off"
-        />
+      <Form onSubmit={handleSubmit} schema={schema} autoComplete="off">
+        <Input name="email" type="email" placeholder="Seu e-mail" />
         <Input name="password" type="password" placeholder="Sua senha" />
         <button type="submit">{loading ? 'Carregando...' : 'Acessar'}</button>
         <Link to="/register">Criar conta gratuita</Link>

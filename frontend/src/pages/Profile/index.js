@@ -9,6 +9,7 @@ import AvatarInput from './AvatarInput';
 import { Container } from './styles';
 
 const schema = Yup.object().shape({
+  avatar_id: Yup.number(),
   name: Yup.string().required('O Nome é obrigatório'),
   email: Yup.string()
     .email('E-mail inválido')
@@ -34,17 +35,18 @@ export default function Profile() {
   const dispatch = useDispatch();
   const profile = useSelector(state => state.user.profile);
 
-  function handleSubmit(data, { resetForm }) {
+  function handleSubmit(data) {
     dispatch(updateProfileRequest(data));
-
-    // resetForm({ oldPassword: '' });
-    // resetForm({ password: '' });
-    // resetForm({ confirmPassword: '' });
   }
 
   return (
     <Container>
-      <Form initialData={profile} onSubmit={handleSubmit} schema={schema}>
+      <Form
+        initialData={profile}
+        onSubmit={handleSubmit}
+        schema={schema}
+        autoComplete="off"
+      >
         <AvatarInput name="avatar_id" />
         <Input name="name" type="text" placeholder="Nome Completo" />
         <Input name="email" type="email" placeholder="Seu E-mail" />
