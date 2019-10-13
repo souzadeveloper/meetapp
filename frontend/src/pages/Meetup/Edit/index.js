@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Form, Input } from '@rocketseat/unform';
 import * as Yup from 'yup';
 import { MdAddCircleOutline } from 'react-icons/md';
+import { toast } from 'react-toastify';
 
 import api from '~/services/api';
 import history from '~/services/history';
@@ -39,9 +40,13 @@ export default function Edit({ match }) {
   }, [id]);
 
   async function handleSubmit(data) {
-    await api.put(`meetups/${id}`, data);
-
-    history.push('/dashboard');
+    try {
+      await api.put(`meetups/${id}`, data);
+      toast.success('Meetup atualizado com Sucesso!');
+      history.push('/dashboard');
+    } catch (error) {
+      toast.error('Erro ao Atualizar o Meetup. Verifique os Dados!');
+    }
   }
 
   return (
@@ -52,7 +57,7 @@ export default function Edit({ match }) {
         schema={schema}
         autoComplete="off"
       >
-        <BannerInput name="file_id" banner={meetup.banner} />
+        <BannerInput name="file_id" />
         <Input name="title" type="text" placeholder="Título do Meetup" />
         <Input
           multiline
@@ -60,11 +65,7 @@ export default function Edit({ match }) {
           rows="10"
           placeholder="Descrição Completa"
         />
-        <DateTimePicker
-          name="date"
-          placeholder="Data do Meetup"
-          value={meetup.date}
-        />
+        <DateTimePicker name="date" placeholder="Data do Meetup" />
         <Input name="location" type="text" placeholder="Localização" />
         <button type="submit">
           <MdAddCircleOutline size={20} color="#fff" />

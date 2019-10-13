@@ -1,14 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useField } from '@rocketseat/unform';
 import { MdCameraAlt } from 'react-icons/md';
-import PropTypes from 'prop-types';
 
 import api from '~/services/api';
 
 import { Container } from './styles';
 
-export default function BannerInput({ banner }) {
-  const { defaultValue, registerField, error } = useField('banner');
+export default function BannerInput() {
+  const { defaultValue, registerField } = useField('banner');
+  const { error } = useField('file_id');
 
   const [file, setFile] = useState(defaultValue && defaultValue.id);
   const [preview, setPreview] = useState(defaultValue && defaultValue.url);
@@ -16,11 +16,11 @@ export default function BannerInput({ banner }) {
   const ref = useRef();
 
   useEffect(() => {
-    if (banner) {
-      setFile(banner.id);
-      setPreview(banner.url);
+    if (defaultValue) {
+      setFile(defaultValue.id);
+      setPreview(defaultValue.url);
     }
-  }, [banner]);
+  }, [defaultValue]);
 
   useEffect(() => {
     if (ref.current) {
@@ -70,14 +70,3 @@ export default function BannerInput({ banner }) {
     </Container>
   );
 }
-
-BannerInput.propTypes = {
-  banner: PropTypes.shape({
-    url: PropTypes.string.isRequired,
-    id: PropTypes.number.isRequired,
-  }),
-};
-
-BannerInput.defaultProps = {
-  banner: null,
-};

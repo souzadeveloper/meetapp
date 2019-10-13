@@ -12,16 +12,16 @@ import { Container } from './styles';
 
 registerLocale('pt', pt);
 
-export default function DateTimePicker({ name, placeholder, value }) {
+export default function DateTimePicker({ name, placeholder }) {
   const ref = useRef(null);
   const { fieldName, registerField, defaultValue, error } = useField(name);
   const [selected, setSelected] = useState(defaultValue);
 
   useEffect(() => {
-    if (value) {
-      setSelected(parseISO(value));
+    if (defaultValue) {
+      setSelected(parseISO(defaultValue));
     }
-  }, [value]);
+  }, [defaultValue]);
 
   useEffect(() => {
     registerField({
@@ -57,10 +57,8 @@ export default function DateTimePicker({ name, placeholder, value }) {
 DateTimePicker.propTypes = {
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
-  value: PropTypes.string,
 };
 
 DateTimePicker.defaultProps = {
   placeholder: '',
-  value: null,
 };

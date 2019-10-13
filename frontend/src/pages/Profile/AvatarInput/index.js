@@ -7,6 +7,7 @@ import { Container } from './styles';
 
 export default function AvatarInput() {
   const { defaultValue, registerField } = useField('avatar');
+  const { error } = useField('avatar_id');
 
   const [file, setFile] = useState(defaultValue && defaultValue.id);
   const [preview, setPreview] = useState(defaultValue && defaultValue.url);
@@ -19,6 +20,9 @@ export default function AvatarInput() {
         name: 'avatar_id',
         ref: ref.current,
         path: 'dataset.file',
+        clearValue: field => {
+          field.dataset.file = file;
+        },
       });
     }
   }, [ref.current]); // eslint-disable-line
@@ -54,6 +58,7 @@ export default function AvatarInput() {
           ref={ref}
         />
       </label>
+      {error && <span>{error}</span>}
     </Container>
   );
 }

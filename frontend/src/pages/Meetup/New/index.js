@@ -27,7 +27,7 @@ export default function New() {
   async function handleSubmit(data) {
     try {
       await api.post('meetups', data);
-
+      toast.success('Meetup cadastrado com Sucesso!');
       history.push('/dashboard');
     } catch (err) {
       toast.error('Erro ao Cadastrar o Meetup. Verifique os Dados!');
