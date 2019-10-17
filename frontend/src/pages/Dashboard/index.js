@@ -20,7 +20,7 @@ export default function Dashboard() {
         return {
           id: meetup.id,
           title: meetup.title,
-          date: format(parseISO(meetup.date), "dd 'de' MMMM', às 'HH'hs'", {
+          date: format(parseISO(meetup.date), "dd 'de' MMMM', às' HH'h'", {
             locale: pt,
           }),
         };

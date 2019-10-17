@@ -25,7 +25,7 @@ export default function Detail({ match }) {
         id,
         title,
         description,
-        date: format(parseISO(date), "dd 'de' MMMM', às 'HH'hs'", {
+        date: format(parseISO(date), "dd 'de' MMMM', às' HH'h'", {
           locale: pt,
         }),
         location,
