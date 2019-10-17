@@ -1,4 +1,6 @@
 import Sequelize, { Model } from 'sequelize';
+import sequelizePaginate from 'sequelize-paginate';
+
 import { isBefore } from 'date-fns';
 
 class Meetup extends Model {
@@ -20,6 +22,8 @@ class Meetup extends Model {
         sequelize,
       }
     );
+
+    sequelizePaginate.paginate(Meetup);
 
     return this;
   }

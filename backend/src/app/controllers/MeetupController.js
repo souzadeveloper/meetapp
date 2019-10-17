@@ -9,19 +9,12 @@ import File from '../models/File';
 class MeetupController {
   async index(req, res) {
     const { page = 1 } = req.query;
+    const limit = 3;
 
     const searchDate = parseISO(req.query.date);
 
-    const meetups = await Meetup.findAll({
-      where: {
-        date: {
-          [Op.between]: [startOfDay(searchDate), endOfDay(searchDate)],
-        },
-      },
+    const options = {
       attributes: ['id', 'title', 'description', 'location', 'date', 'past'],
-      order: ['date'],
-      limite: 10,
-      offset: (page - 1) * 10,
       include: [
         {
           model: User,
@@ -34,9 +27,19 @@ class MeetupController {
           attributes: ['id', 'path', 'url'],
         },
       ],
-    });
+      page,
+      paginate: limit,
+      order: [['date']],
+      where: {
+        date: {
+          [Op.between]: [startOfDay(searchDate), endOfDay(searchDate)],
+        },
+      },
+    };
 
-    return res.json(meetups);
+    const { docs, pages, total } = await Meetup.paginate(options);
+
+    return res.json({ docs, total, pages, limit, page: Number(page) });
   }
 
   async show(req, res) {

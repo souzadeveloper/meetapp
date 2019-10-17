@@ -19,6 +19,7 @@ function Dashboard({ isFocused }) {
   const [meetups, setMeetups] = useState([]);
   const [date, setDate] = useState(new Date());
   const [page, setPage] = useState(1);
+  const [pagination, setPagination] = useState({});
 
   const dateFormatted = useMemo(
     () => format(date, "d 'de' MMMM", { locale: pt }),
@@ -30,7 +31,10 @@ function Dashboard({ isFocused }) {
       params: { date, page },
     });
 
-    setMeetups(response.data);
+    const { docs, ...docsInfo } = response.data;
+
+    setMeetups(docs);
+    setPagination(docsInfo);
   }, [date, page]);
 
   useEffect(() => {
@@ -41,10 +45,18 @@ function Dashboard({ isFocused }) {
 
   function handlePrevDay() {
     setDate(subDays(date, 1));
+    setPage(1);
   }
 
   function handleNextDay() {
     setDate(addDays(date, 1));
+    setPage(1);
+  }
+
+  function handleLoadMore() {
+    if (page === pagination.pages) return;
+
+    setPage(page + 1);
   }
 
   async function handleSubscription(id) {
@@ -79,6 +91,8 @@ function Dashboard({ isFocused }) {
         <List
           data={meetups}
           keyExtractor={item => String(item.id)}
+          onEndReached={handleLoadMore}
+          onEndReachedThreshold={0.1}
           renderItem={({ item }) => (
             <Meetup
               handle={() => handleSubscription(item.id)}
