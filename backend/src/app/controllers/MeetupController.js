@@ -18,7 +18,7 @@ class MeetupController {
           [Op.between]: [startOfDay(searchDate), endOfDay(searchDate)],
         },
       },
-      attributes: ['id', 'title', 'description', 'location', 'date'],
+      attributes: ['id', 'title', 'description', 'location', 'date', 'past'],
       order: ['date'],
       limite: 10,
       offset: (page - 1) * 10,
@@ -27,13 +27,11 @@ class MeetupController {
           model: User,
           as: 'organizer',
           attributes: ['id', 'name'],
-          include: [
-            {
-              model: File,
-              as: 'avatar',
-              attributes: ['id', 'path', 'url'],
-            },
-          ],
+        },
+        {
+          model: File,
+          as: 'banner',
+          attributes: ['id', 'path', 'url'],
         },
       ],
     });
@@ -50,7 +48,15 @@ class MeetupController {
           attributes: ['id', 'path', 'url'],
         },
       ],
-      attributes: ['id', 'title', 'description', 'location', 'date', 'user_id'],
+      attributes: [
+        'id',
+        'title',
+        'description',
+        'location',
+        'date',
+        'user_id',
+        'past',
+      ],
     });
 
     if (meetup.user_id !== req.userId) {

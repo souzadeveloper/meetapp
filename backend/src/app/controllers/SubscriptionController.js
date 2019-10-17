@@ -1,6 +1,7 @@
 import { Op } from 'sequelize';
 
 import User from '../models/User';
+import File from '../models/File';
 import Meetup from '../models/Meetup';
 import Subscription from '../models/Subscription';
 
@@ -13,18 +14,40 @@ class SubscriptionController {
       where: {
         user_id: req.userId,
       },
+      attributes: ['id'],
       include: [
         {
           model: Meetup,
+          as: 'meetup',
           where: {
             date: {
               [Op.gt]: new Date(),
             },
           },
           required: true,
+          attributes: [
+            'id',
+            'title',
+            'description',
+            'location',
+            'date',
+            'past',
+          ],
+          include: [
+            {
+              model: User,
+              as: 'organizer',
+              attributes: ['id', 'name'],
+            },
+            {
+              model: File,
+              as: 'banner',
+              attributes: ['id', 'path', 'url'],
+            },
+          ],
         },
       ],
-      order: [[Meetup, 'date']],
+      order: [['meetup', 'date']],
     });
 
     return res.json(subscriptions);
@@ -73,6 +96,7 @@ class SubscriptionController {
       include: [
         {
           model: Meetup,
+          as: 'meetup',
           required: true,
           where: {
             date: meetup.date,
@@ -98,6 +122,28 @@ class SubscriptionController {
     });
 
     return res.json(subscription);
+  }
+
+  async delete(req, res) {
+    const subscription = await Subscription.findByPk(req.params.id);
+
+    if (subscription.user_id !== req.userId) {
+      return res
+        .status(401)
+        .json({ error: 'Only the User can delete this Subscription.' });
+    }
+
+    const meetup = await Meetup.findByPk(subscription.meetup_id);
+
+    if (meetup.past) {
+      return res
+        .status(400)
+        .json({ error: "You can't delete past Meeting Subscriptions!" });
+    }
+
+    await subscription.destroy();
+
+    return res.send();
   }
 }
 
