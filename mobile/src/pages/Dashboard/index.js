@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect, useCallback } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { TouchableOpacity, Alert } from 'react-native';
 import { format, subDays, addDays } from 'date-fns';
@@ -13,50 +13,72 @@ import Meetup from '~/Components/Meetup';
 import Header from '~/Components/Header';
 import Background from '~/Components/Background';
 
-import { Container, List, SelectDateContainer, SelectedDate } from './styles';
+import {
+  Container,
+  List,
+  SelectDateContainer,
+  SelectedDate,
+  Loading,
+} from './styles';
 
 function Dashboard({ isFocused }) {
   const [meetups, setMeetups] = useState([]);
   const [date, setDate] = useState(new Date());
   const [page, setPage] = useState(1);
   const [pagination, setPagination] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
 
   const dateFormatted = useMemo(
     () => format(date, "d 'de' MMMM", { locale: pt }),
     [date]
   );
 
-  const loadMeetups = useCallback(async () => {
+  async function loadMeetups(pageNumber = 1, isRefresh = true) {
+    if (loading) return;
+
+    setLoading(true);
+
     const response = await api.get('meetups', {
-      params: { date, page },
+      params: { date, page: pageNumber },
     });
 
     const { docs, ...docsInfo } = response.data;
 
-    setMeetups(docs);
+    setMeetups(isRefresh ? docs : [...meetups, ...docs]);
+    setPage(pageNumber);
     setPagination(docsInfo);
-  }, [date, page]);
+    setLoading(false);
+  }
+
+  async function refreshList() {
+    setRefreshing(true);
+
+    await loadMeetups();
+
+    setRefreshing(false);
+  }
 
   useEffect(() => {
     if (isFocused) {
       loadMeetups();
     }
-  }, [isFocused, loadMeetups]);
+  }, [isFocused, date]);
 
   function handlePrevDay() {
     setDate(subDays(date, 1));
-    setPage(1);
   }
 
   function handleNextDay() {
     setDate(addDays(date, 1));
-    setPage(1);
   }
 
   function handleLoadMore() {
     if (page === pagination.pages) return;
 
-    setPage(page + 1);
+    const pageNumber = page + 1;
+
+    loadMeetups(pageNumber, false);
   }
 
   async function handleSubscription(id) {
@@ -93,6 +115,10 @@ function Dashboard({ isFocused }) {
           keyExtractor={item => String(item.id)}
           onEndReached={handleLoadMore}
           onEndReachedThreshold={0.1}
+          showsVerticalScrollIndicator={false}
+          onRefresh={refreshList}
+          refreshing={refreshing}
+          ListFooterComponent={loading && <Loading />}
           renderItem={({ item }) => (
             <Meetup
               handle={() => handleSubscription(item.id)}
