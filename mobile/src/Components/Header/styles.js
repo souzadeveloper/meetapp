@@ -5,5 +5,5 @@ export const Container = styled.View`
   justify-content: center;
   align-items: center;
   max-height: 64px;
-  background: rgba(0, 0, 0, 0.3);
+  background: #18161f;
 `;
