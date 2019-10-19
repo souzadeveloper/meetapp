@@ -11,15 +11,30 @@ import Meetup from '~/Components/Meetup';
 import Background from '~/Components/Background';
 import Header from '~/Components/Header';
 
-import { Container, List } from './styles';
+import { Container, List, Loading } from './styles';
 
 function Subscriptions({ isFocused }) {
   const [subscriptions, setSubscriptions] = useState([]);
+  const [refreshing, setRefreshing] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   async function loadSubscriptions() {
+    if (loading) return;
+
+    setLoading(true);
+
     const response = await api.get('subscriptions');
 
     setSubscriptions(response.data);
+    setLoading(false);
+  }
+
+  async function refreshList() {
+    setRefreshing(true);
+
+    await loadSubscriptions();
+
+    setRefreshing(false);
   }
 
   useEffect(() => {
@@ -53,6 +68,10 @@ function Subscriptions({ isFocused }) {
         <List
           data={subscriptions}
           keyExtractor={item => String(item.id)}
+          showsVerticalScrollIndicator={false}
+          onRefresh={refreshList}
+          refreshing={refreshing}
+          ListFooterComponent={loading && <Loading />}
           renderItem={({ item }) => (
             <Meetup
               handle={() => handleCancel(item.id)}
