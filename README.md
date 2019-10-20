@@ -16,17 +16,17 @@ O Meetup é uma Aplicação completa com Backend que é uma API desenvolvida em 
 `yarn`
 5. Caso tenha optado por utilizar outro Banco de Dados que não seja o **PostgreSQL**, acesse a documentação do **[Sequelize](https://sequelize.org/v5/manual/dialects.html)** para verificar a depência correspondente ao Banco escolhido.
 6. Em seguida o Projeto no **[VsCode](https://code.visualstudio.com/)** para configurar as variáveis de Ambiente. Para isso na raíz do Projeto crie um arquivo de nome **.env** e copie o conteúdo do arquivo **.env.example** e preencha as configurações de acordo com o seu Ambiente.
-6. Agora execute o comando abaixo para executar as Migrations no Banco de Dados:
-`yarn sequelize db:migrate`
-7. Agora você já deve ser capaz de iniciar o seu Backend apenas executando o comando abaixo:
+6. Agora execute o comando abaixo para executar as Migrations no Banco de Dados:</br>
+**`yarn sequelize db:migrate`**
+7. Agora você já deve ser capaz de iniciar o seu Backend apenas executando o comando abaixo:</br>
 `yarn dev`
 
 ## Frontend (React JS)
 
-1. Acesse o diretório do Projeto e execute o comando abaixo para baixar as dependências:
+1. Acesse o diretório do Projeto e execute o comando abaixo para baixar as dependências:</br>
 `yarn`
 2. Em seguida o Projeto no **[VsCode](https://code.visualstudio.com/)** para configurar as variáveis de Ambiente. Para isso na raíz do Projeto crie um arquivo de nome **.env** e copie o conteúdo do arquivo **.env.example** e preencha as configurações de acordo com o seu Ambiente.
-3. Agora você já deve ser capaz de iniciar o seu Frontend Web apenas executando o comando abaixo:
+3. Agora você já deve ser capaz de iniciar o seu Frontend Web apenas executando o comando abaixo:</br>
 `yarn start`
 
 ## Mobile (React Native)
