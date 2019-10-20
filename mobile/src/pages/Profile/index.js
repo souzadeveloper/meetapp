@@ -74,7 +74,7 @@ export default function Profile() {
           password,
           confirmPassword,
         },
-        { abortEarly: true }
+        { abortEarly: false }
       )
       .then(function success(value) {
         dispatch(updateProfileRequest(value));

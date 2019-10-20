@@ -1,7 +1,9 @@
 import { Alert } from 'react-native';
 import { takeLatest, call, put, all } from 'redux-saga/effects';
+import Toast from 'react-native-root-toast';
 
 import api from '~/services/api';
+import NavigationService from '~/services/navigation';
 
 import { signInSuccess, signFailure } from './actions';
 
@@ -16,16 +18,11 @@ export function* signIn({ payload }) {
 
     const { token, user } = response.data;
 
-    if (user.provider) {
-      Alert.alert('Falha!', 'O Usuário não pode ser Prestador de Serviços.');
-      return;
-    }
-
     api.defaults.headers.Authorization = `Bearer ${token}`;
 
     yield put(signInSuccess(token, user));
   } catch (err) {
-    Alert.alert('Erro!', 'Usuário e/ou Senha inválidos.');
+    Alert.alert('Erro!', err.response.data.error || 'Falha na Autenticação!');
     yield put(signFailure());
   }
 }
@@ -39,8 +36,21 @@ export function* signUp({ payload }) {
       email,
       password,
     });
+
+    Toast.show('Conta criada com Sucesso!', {
+      duration: Toast.durations.SHORT,
+      position: Toast.positions.BOTTOM,
+      shadow: true,
+      hideOnPress: true,
+      animation: true,
+    });
+
+    NavigationService.navigate('SignIn');
   } catch (err) {
-    Alert.alert('Erro!', 'Verifique os seus Dados.');
+    Alert.alert(
+      'Erro!',
+      err.response.data.error || 'Falha ao criar nova Conta!'
+    );
     yield put(signFailure());
   }
 }

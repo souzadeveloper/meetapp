@@ -35,20 +35,28 @@ function Dashboard({ isFocused }) {
   );
 
   async function loadMeetups(pageNumber = 1, isRefresh = true) {
-    if (loading) return;
+    try {
+      if (loading) return;
 
-    setLoading(true);
+      setLoading(true);
 
-    const response = await api.get('meetups', {
-      params: { date, page: pageNumber },
-    });
+      const response = await api.get('meetups', {
+        params: { date, page: pageNumber },
+      });
 
-    const { docs, ...docsInfo } = response.data;
+      const { docs, ...docsInfo } = response.data;
 
-    setMeetups(isRefresh ? docs : [...meetups, ...docs]);
-    setPage(pageNumber);
-    setPagination(docsInfo);
-    setLoading(false);
+      setMeetups(isRefresh ? docs : [...meetups, ...docs]);
+      setPage(pageNumber);
+      setPagination(docsInfo);
+    } catch (err) {
+      Alert.alert(
+        'Erro!',
+        err.response.data.error || 'Erro ao carregar os Meetups!'
+      );
+    } finally {
+      setLoading(false);
+    }
   }
 
   async function refreshList() {
@@ -93,7 +101,10 @@ function Dashboard({ isFocused }) {
         animation: true,
       });
     } catch (err) {
-      Alert.alert('Falha!', err.response.data.error);
+      Alert.alert(
+        'Erro!',
+        err.response.data.error || 'Erro ao realizar Inscrição!'
+      );
     }
   }
 

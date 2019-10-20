@@ -19,14 +19,22 @@ function Subscriptions({ isFocused }) {
   const [loading, setLoading] = useState(false);
 
   async function loadSubscriptions() {
-    if (loading) return;
+    try {
+      if (loading) return;
 
-    setLoading(true);
+      setLoading(true);
 
-    const response = await api.get('subscriptions');
+      const response = await api.get('subscriptions');
 
-    setSubscriptions(response.data);
-    setLoading(false);
+      setSubscriptions(response.data);
+    } catch (err) {
+      Alert.alert(
+        'Erro!',
+        err.response.data.error || 'Erro ao carregar as Inscrições!'
+      );
+    } finally {
+      setLoading(false);
+    }
   }
 
   async function refreshList() {
@@ -57,7 +65,10 @@ function Subscriptions({ isFocused }) {
         animation: true,
       });
     } catch (err) {
-      Alert.alert('Falha!', err.response.data.error);
+      Alert.alert(
+        'Erro!',
+        err.response.data.error || 'Erro ao cancelar Inscrição'
+      );
     }
   }
 

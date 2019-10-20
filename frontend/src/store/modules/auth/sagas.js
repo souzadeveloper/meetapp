@@ -23,7 +23,7 @@ export function* signIn({ payload }) {
 
     history.push('/dashboard');
   } catch (err) {
-    toast.error('Falha na Autenticação. Usuário e/ou Senha inválidos!');
+    toast.error(err.response.data.error || 'Falha na Autenticação!');
     yield put(signFailure());
   }
 }
@@ -38,9 +38,11 @@ export function* signUp({ payload }) {
       password,
     });
 
+    toast.success('Conta criada com Sucesso!');
+
     history.push('/');
   } catch (err) {
-    toast.error('Falha no Cadastro. Verifique seus dados!');
+    toast.error(err.response.data.error || 'Falha ao criar nova Conta!');
     yield put(signFailure());
   }
 }

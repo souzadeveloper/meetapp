@@ -1,6 +1,8 @@
 import React, { useRef, useState } from 'react';
 import { Image } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import * as Yup from 'yup';
+import Toast from 'react-native-root-toast';
 
 import logo from '~/assets/logo.png';
 import Background from '~/Components/Background';
@@ -15,6 +17,14 @@ import {
   SignLinkText,
 } from './styles';
 
+const schema = Yup.object().shape({
+  name: Yup.string().required('O Nome é obrigatório'),
+  email: Yup.string()
+    .email('E-mail inválido')
+    .required('O E-mail é obrigatório'),
+  password: Yup.string().required('A Senha é obrigatória'),
+});
+
 export default function SignUp({ navigation }) {
   const dispatch = useDispatch();
   const emailRef = useRef();
@@ -27,9 +37,20 @@ export default function SignUp({ navigation }) {
   const loading = useSelector(state => state.auth.loading);
 
   function handleSubmit() {
-    dispatch(signUpRequest(name, email, password));
-
-    navigation.navigate('SignIn');
+    schema
+      .validate({ name, email, password }, { abortEarly: false })
+      .then(function success() {
+        dispatch(signUpRequest(name, email, password));
+      })
+      .catch(function error(err) {
+        Toast.show(err.errors[0], {
+          duration: Toast.durations.SHORT,
+          position: Toast.positions.BOTTOM,
+          shadow: true,
+          hideOnPress: true,
+          animation: true,
+        });
+      });
   }
 
   return (

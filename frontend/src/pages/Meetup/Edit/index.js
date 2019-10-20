@@ -42,10 +42,12 @@ export default function Edit({ match }) {
   async function handleSubmit(data) {
     try {
       await api.put(`meetups/${id}`, data);
+
       toast.success('Meetup atualizado com Sucesso!');
+
       history.push('/dashboard');
-    } catch (error) {
-      toast.error('Erro ao Atualizar o Meetup. Verifique os Dados!');
+    } catch (err) {
+      toast.error(err.response.data.error || 'Erro ao Atualizar o Meetup!');
     }
   }
 

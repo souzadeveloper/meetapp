@@ -3,6 +3,7 @@ import { format, parseISO } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import { Link } from 'react-router-dom';
 import { MdAddCircleOutline, MdChevronRight } from 'react-icons/md';
+import { toast } from 'react-toastify';
 
 import api from '~/services/api';
 import history from '~/services/history';
@@ -14,19 +15,23 @@ export default function Dashboard() {
 
   useEffect(() => {
     async function loadMeetups() {
-      const response = await api.get('organizations');
+      try {
+        const response = await api.get('organizations');
 
-      const data = response.data.map(meetup => {
-        return {
-          id: meetup.id,
-          title: meetup.title,
-          date: format(parseISO(meetup.date), "dd 'de' MMMM', às' HH'h'", {
-            locale: pt,
-          }),
-        };
-      });
+        const data = response.data.map(meetup => {
+          return {
+            id: meetup.id,
+            title: meetup.title,
+            date: format(parseISO(meetup.date), "dd 'de' MMMM', às' HH'h'", {
+              locale: pt,
+            }),
+          };
+        });
 
-      setMeetups(data);
+        setMeetups(data);
+      } catch (err) {
+        toast.error('Falha ao carregar os Meetups!');
+      }
     }
 
     loadMeetups();

@@ -17,22 +17,34 @@ export default function Detail({ match }) {
 
   useEffect(() => {
     async function getMeetup() {
-      const response = await api.get(`meetups/${id}`);
+      try {
+        const response = await api.get(`meetups/${id}`);
 
-      const { title, description, date, location, banner } = response.data;
+        const {
+          title,
+          description,
+          date,
+          location,
+          banner,
+          past,
+        } = response.data;
 
-      const data = {
-        id,
-        title,
-        description,
-        date: format(parseISO(date), "dd 'de' MMMM', às' HH'h'", {
-          locale: pt,
-        }),
-        location,
-        banner,
-      };
+        const data = {
+          id,
+          title,
+          description,
+          date: format(parseISO(date), "dd 'de' MMMM', às' HH'h'", {
+            locale: pt,
+          }),
+          location,
+          banner,
+          past,
+        };
 
-      setMeetup(data);
+        setMeetup(data);
+      } catch (err) {
+        toast.error('Falha ao carregar os dados do Meetup!');
+      }
     }
 
     getMeetup();
@@ -48,37 +60,51 @@ export default function Detail({ match }) {
 
       history.push('/dashboard');
     } catch (err) {
-      toast.error('Falha ao Cancelar o Meetup!');
+      toast.error(err.response.data.error || 'Falha ao Cancelar o Meetup!');
     }
   }
 
   return (
     <Container>
-      <header>
-        <strong>{meetup.title}</strong>
-        <aside>
-          <button className="editButton" type="button" onClick={handleEdit}>
-            <MdEdit size={20} color="#fff" />
-            Editar
-          </button>
-          <button className="cancelButton" type="button" onClick={handleCancel}>
-            <MdDeleteForever size={20} color="#fff" />
-            Cancelar
-          </button>
-        </aside>
-      </header>
-      <img src={meetup.banner && meetup.banner.url} alt="Banner" />
-      <Description>{meetup.description}</Description>
-      <footer>
-        <Time>
-          <MdEvent size={20} color="#999" />
-          <strong>{meetup.date}</strong>
-        </Time>
-        <Location>
-          <MdRoom size={20} color="#999" />
-          <strong>{meetup.location}</strong>
-        </Location>
-      </footer>
+      {meetup.id && (
+        <>
+          <header>
+            <strong>{meetup.title}</strong>
+            {!meetup.past && (
+              <aside>
+                <button
+                  className="editButton"
+                  type="button"
+                  onClick={handleEdit}
+                >
+                  <MdEdit size={20} color="#fff" />
+                  Editar
+                </button>
+                <button
+                  className="cancelButton"
+                  type="button"
+                  onClick={handleCancel}
+                >
+                  <MdDeleteForever size={20} color="#fff" />
+                  Cancelar
+                </button>
+              </aside>
+            )}
+          </header>
+          <img src={meetup.banner && meetup.banner.url} alt="Banner" />
+          <Description>{meetup.description}</Description>
+          <footer>
+            <Time>
+              <MdEvent size={20} color="#999" />
+              <strong>{meetup.date}</strong>
+            </Time>
+            <Location>
+              <MdRoom size={20} color="#999" />
+              <strong>{meetup.location}</strong>
+            </Location>
+          </footer>
+        </>
+      )}
     </Container>
   );
 }
