@@ -24,19 +24,19 @@ O Meetup é uma Aplicação completa com Backend que é uma API desenvolvida em 
 ## Frontend (React JS)
 
 1. Acesse o diretório do Projeto e execute o comando abaixo para baixar as dependências:
-`yarn`
+#### `yarn`
 2. Em seguida o Projeto no **[VsCode](https://code.visualstudio.com/)** para configurar as variáveis de Ambiente. Para isso na raíz do Projeto crie um arquivo de nome **.env** e copie o conteúdo do arquivo **.env.example** e preencha as configurações de acordo com o seu Ambiente.
 3. Agora você já deve ser capaz de iniciar o seu Frontend Web apenas executando o comando abaixo:
-`yarn start`
+#### `yarn start`
 
 ## Mobile (React Native)
 
 1. Acesse o diretório do Projeto e execute o comando abaixo para baixar as dependências:
-`yarn`
+#### `yarn`
 2. Em seguida o Projeto no **[VsCode](https://code.visualstudio.com/)** para configurar as variáveis de Ambiente. Para isso na raíz do Projeto crie um arquivo de nome **.env** e copie o conteúdo do arquivo **.env.example** e preencha as configurações de acordo com o seu Ambiente.
 3. Agora você já deve ser capaz de iniciar o seu aplicativo Mobile apenas executando o comando abaixo de acordo com a sua plataforma:
-`yarn android` (android)
+#### `yarn android` (android)
 ou
-`yarn ios` (ios)
+#### `yarn ios` (ios)
 
 ***Observação: A Aplicação Mobile não foi testada no Ios, devido a falta do Ambiente de Desenvolvimento necessário.***
