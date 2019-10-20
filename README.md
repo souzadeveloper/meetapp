@@ -43,7 +43,7 @@ O Meetup é uma Aplicação completa com Backend que é uma API desenvolvida em 
 ou
 #### `yarn ios` (ios)
 </br>
-***Observação 1: Para que os Passos descritos acima funcionem corretamente é necessário que você já possua um Ambiente de Desenvolvimento previamente configurado. Se você não possui este ambiente, execute os passos descritos [aqui](https://docs.rocketseat.dev/ambiente-react-native/introducao)***
+***Observação 1***: Para que os Passos descritos acima funcionem corretamente é necessário que você já possua um Ambiente de Desenvolvimento previamente configurado. Se você não possui este ambiente, execute os passos descritos [aqui](https://docs.rocketseat.dev/ambiente-react-native/introducao)
 
 </br>
-***Observação 2: A Aplicação Mobile não foi testada no Ios, devido a falta do Ambiente de Desenvolvimento necessário.***
+***Observação 2***: A Aplicação Mobile não foi testada no Ios, devido a falta do Ambiente de Desenvolvimento necessário.
