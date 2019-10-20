@@ -9,7 +9,7 @@ import AvatarInput from './AvatarInput';
 import { Container } from './styles';
 
 const schema = Yup.object().shape({
-  avatar_id: Yup.number(),
+  avatar_id: Yup.mixed(),
   name: Yup.string().required('O Nome é obrigatório'),
   email: Yup.string()
     .email('E-mail inválido')
