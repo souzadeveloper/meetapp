@@ -15,11 +15,15 @@ O Meetup é uma Aplicação completa com Backend que é uma API desenvolvida em 
 4. Acesse o diretório do Projeto e execute o comando abaixo para baixar as dependências:
 #### `yarn`
 5. Caso tenha optado por utilizar outro Banco de Dados que não seja o **PostgreSQL**, acesse a documentação do **[Sequelize](https://sequelize.org/v5/manual/dialects.html)** para verificar a depência correspondente ao Banco escolhido.
-6. Em seguida o Projeto no **[VsCode](https://code.visualstudio.com/)** para configurar as variáveis de Ambiente. Para isso na raíz do Projeto crie um arquivo de nome **.env** e copie o conteúdo do arquivo **.env.example** e preencha as configurações de acordo com o seu Ambiente.
-7. Agora execute o comando abaixo para executar as Migrations no Banco de Dados:
+6. Crie uma Conta no [Mailtrap](https://mailtrap.io/) para o envio de E-mails.
+7. Crie também uma conta no [Sentry](https://sentry.io) para que você possa receber as Exceções geradas pela aplicação.
+8. Em seguida abra o Projeto no **[VsCode](https://code.visualstudio.com/)** para configurar as variáveis de Ambiente. Para isso na raíz do Projeto crie um arquivo de nome **.env** e copie o conteúdo do arquivo **.env.example** e preencha as configurações de acordo com o seu Ambiente.
+9. Agora execute o comando abaixo para executar as Migrations no Banco de Dados:
 #### `yarn sequelize db:migrate`
-8. Agora você já deve ser capaz de iniciar o seu Backend apenas executando o comando abaixo:
+10. Agora você já deve ser capaz de iniciar o seu Backend apenas executando o comando abaixo:
 #### `yarn dev`
+11. Execute o comando abaixo para inciar o Serviço de Filas, responsável pelo envio dos e-mails:
+#### `yarn queue`
 
 ## Frontend (React JS)
 
