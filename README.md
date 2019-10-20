@@ -12,8 +12,8 @@ O Meetup é uma Aplicação completa com Backend que é uma API desenvolvida em 
 1. Primeiramente precisaremos inciar um Servidor **[Redis](https://redis.io/)**. Para isso você pode utilizar o **[Docker](https://www.docker.com/)** ou instalar o seu próprio Servidor.
 2. Inicie também um Servidor **[PostgreSQL](https://www.postgresql.org/)** para criarmos o Banco de Dados. Para isso você também pode utilizar o **Docker** ou instalar um outro Banco de Dados de sua preferência.
 3. Após iniciar o **PostgreSQL**, crie um banco de Dados com o nome **meetup**, utilizando o **[Postbird](https://snapcraft.io/postbird)** ou outro *Client* de Banco de Dados PostgreSQL de sua preferência.
-4. Acesse o diretório do Projeto e execute o comando abaixo para baixar as dependências:</br>
-**`yarn`**
+4. Acesse o diretório do Projeto e execute o comando abaixo para baixar as dependências:
+### `yarn`
 5. Caso tenha optado por utilizar outro Banco de Dados que não seja o **PostgreSQL**, acesse a documentação do **[Sequelize](https://sequelize.org/v5/manual/dialects.html)** para verificar a depência correspondente ao Banco escolhido.
 6. Em seguida o Projeto no **[VsCode](https://code.visualstudio.com/)** para configurar as variáveis de Ambiente. Para isso na raíz do Projeto crie um arquivo de nome **.env** e copie o conteúdo do arquivo **.env.example** e preencha as configurações de acordo com o seu Ambiente.
 7. Agora execute o comando abaixo para executar as Migrations no Banco de Dados:
