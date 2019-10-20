@@ -1,5 +1,5 @@
 # Meetup
-Este Projeto faz parte do **Desafio Final do Bootcamp da Rocketseat** e foi criado utilizando os seguintes Frameworks abaixo:
+O Meetup é uma Aplicação completa com Backend que é uma API desenvolvida em Node.js utilizando o Framework **Express**. Além disso possui o Frontend Web desenvolvido em **React JS** e um *Client* Mobile desenvolvido em **React Native**. Nesta aplicação os Usuários podem cadastrar e administrar **Meetups** e também podem se inscrever em **Meetups** organizados por outros usuários. Este Projeto faz parte do **Desafio Final do Bootcamp da Rocketseat**. Para conhecer mais sobre os Frameworks utilizados, acesse as documentações abaixo:
 
 - [Express](https://expressjs.com/)
 - [React JS](https://reactjs.org/)
@@ -12,39 +12,31 @@ Este Projeto faz parte do **Desafio Final do Bootcamp da Rocketseat** e foi cria
 1. Primeiramente precisaremos inciar um Servidor **[Redis](https://redis.io/)**. Para isso você pode utilizar o **[Docker](https://www.docker.com/)** ou instalar o seu próprio Servidor.
 2. Inicie também um Servidor **[PostgreSQL](https://www.postgresql.org/)** para criarmos o Banco de Dados. Para isso você também pode utilizar o **Docker** ou instalar um outro Banco de Dados de sua preferência.
 3. Após iniciar o **PostgreSQL**, crie um banco de Dados com o nome **meetup**, utilizando o **[Postbird](https://snapcraft.io/postbird)** ou outro *Client* de Banco de Dados PostgreSQL de sua preferência.
-4. Abra o Projeto no **[VsCode](https://code.visualstudio.com/)** para configurar as variáveis de Ambiente.
+4. Acesse o diretório do Projeto e execute o comando abaixo para baixar as dependências:
+`yarn`
+5. Caso tenha optado por utilizar outro Banco de Dados que não seja o **PostgreSQL**, acesse a documentação do **[Sequelize](https://sequelize.org/v5/manual/dialects.html)** para verificar a depência correspondente ao Banco escolhido.
+6. Em seguida o Projeto no **[VsCode](https://code.visualstudio.com/)** para configurar as variáveis de Ambiente. Para isso na raíz do Projeto crie um arquivo de nome **.env** e copie o conteúdo do arquivo **.env.example** e preencha as configurações de acordo com o seu Ambiente.
+6. Agora execute o comando abaixo para executar as Migrations no Banco de Dados:
+`yarn sequelize db:migrate`
+7. Agora você já deve ser capaz de iniciar o seu Backend apenas executando o comando abaixo:
+`yarn dev`
 
-In the project directory, you can run:
+## Frontend (React JS)
 
-### `npm start`
+1. Acesse o diretório do Projeto e execute o comando abaixo para baixar as dependências:
+`yarn`
+2. Em seguida o Projeto no **[VsCode](https://code.visualstudio.com/)** para configurar as variáveis de Ambiente. Para isso na raíz do Projeto crie um arquivo de nome **.env** e copie o conteúdo do arquivo **.env.example** e preencha as configurações de acordo com o seu Ambiente.
+3. Agora você já deve ser capaz de iniciar o seu Frontend Web apenas executando o comando abaixo:
+`yarn start`
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Mobile (React Native)
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+1. Acesse o diretório do Projeto e execute o comando abaixo para baixar as dependências:
+`yarn`
+2. Em seguida o Projeto no **[VsCode](https://code.visualstudio.com/)** para configurar as variáveis de Ambiente. Para isso na raíz do Projeto crie um arquivo de nome **.env** e copie o conteúdo do arquivo **.env.example** e preencha as configurações de acordo com o seu Ambiente.
+3. Agora você já deve ser capaz de iniciar o seu aplicativo Mobile apenas executando o comando abaixo de acordo com a sua plataforma:
+`yarn android` (android)
+ou
+`yarn ios` (ios)
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+***Observação: A Aplicação Mobile não foi testada no Ios, devido a falta do Ambiente de Desenvolvimento necessário.***
