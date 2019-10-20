@@ -1,11 +1,11 @@
 # Meetup
-Este Projeto faz parte do <b>Desafio Final do Bootcamp da Rocketseat</b> e foi criado utilizando os seguintes Frameworks abaixo:
+Este Projeto faz parte do **Desafio Final do Bootcamp da Rocketseat** e foi criado utilizando os seguintes Frameworks abaixo:
 
-[Express](https://expressjs.com/)</br>
-[React JS](https://reactjs.org/)</br>
-[Reac Native](https://facebook.github.io/react-native/)
+- [Express](https://expressjs.com/)
+- [React JS](https://reactjs.org/)
+- [Reac Native](https://facebook.github.io/react-native/)
 
-<p><strong>Para executar os Projetos você precisará executar os passos descritos abaixo:<p>
+**Para executar os Projetos você precisará executar os passos descritos abaixo:**
 
 ## Backend (Express)
 
