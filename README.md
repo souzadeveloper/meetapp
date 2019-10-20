@@ -1,4 +1,8 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este Projeto faz parte do Desafio Final do Bootcamp da Rocketseat e foi criado utilizando os seguintes Frameworks abaixo:
+
+[Express](https://expressjs.com/)
+[React JS](https://reactjs.org/)
+[Reac Native](https://facebook.github.io/react-native/)
 
 ## Available Scripts
 
