@@ -37,7 +37,7 @@ module.exports = {
     "no-param-reassign": "off",
     "no-underscore-dangle": "off",
     camelcase: "off",
-    "no-console": ["error", { allow: ["tron"] }],
+    "no-console": ["error", { allow: ["tron", "disableYellowBox"] }],
     "react-hooks/rules-of-hooks": "error",
     "react/jsx-props-no-spreading": "off",
     "react/prop-types": ["error", { "ignore": ["navigation", "tintColor"] }]

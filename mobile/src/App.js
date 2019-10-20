@@ -1,12 +1,11 @@
 import React from 'react';
-import { YellowBox } from 'react-native';
 import { useSelector } from 'react-redux';
 import Orientation from 'react-native-orientation-locker';
 
 import createRouter from './routes';
 import NavigationService from '~/services/navigation';
 
-YellowBox.ignoreWarnings(['Warning:']);
+console.disableYellowBox = true;
 
 Orientation.lockToPortrait();
 
