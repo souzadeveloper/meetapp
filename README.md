@@ -46,3 +46,5 @@ ou
 ***Observação 1***: Para que os Passos descritos acima funcionem corretamente é necessário que você já possua um Ambiente de Desenvolvimento previamente configurado. Se você não possui este ambiente, execute os passos descritos [aqui](https://docs.rocketseat.dev/ambiente-react-native/introducao)
 
 ***Observação 2***: A Aplicação Mobile não foi testada no Ios, devido a falta do Ambiente de Desenvolvimento necessário.
+
+***TODO***: Verificar problema com a Tela de Profile, que por algum motivo ainda desconhecido, está exibindo uma "Faixa Branca" ao acionar o Teclado no Android. 
